@@ -1,4 +1,4 @@
-package pageUIs.nopCommerce.user;
+package pageUIs.workpresspj.user;
 
 import org.openqa.selenium.WebDriver;
 

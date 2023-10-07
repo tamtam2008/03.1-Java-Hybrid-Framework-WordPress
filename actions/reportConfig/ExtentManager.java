@@ -18,8 +18,8 @@ public class ExtentManager {
 		reporter.config().setTheme(Theme.DARK);
 
 		extentReports.attachReporter(reporter);
-		extentReports.setSystemInfo("Company", "Automation FC");
-		extentReports.setSystemInfo("Project", "NopCommerce");
+		extentReports.setSystemInfo("Company", "Demo CV Tam Tam");
+		extentReports.setSystemInfo("Project", "Wordpress");
 		extentReports.setSystemInfo("Team", "Basus VN");
 		extentReports.setSystemInfo("JDK version", GlobalConstants.JAVA_VERSION);
 		return extentReports;

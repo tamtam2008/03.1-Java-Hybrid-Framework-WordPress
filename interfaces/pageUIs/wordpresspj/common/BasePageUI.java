@@ -1,4 +1,4 @@
-package pageUIs.nopCommerce.user;
+package pageUIs.wordpresspj.common;
 
 public class BasePageUI {
 

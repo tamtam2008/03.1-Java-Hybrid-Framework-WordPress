@@ -19,15 +19,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pageObjects.nopCommerce.admin.AdminLoginPageObject;
-import pageObjects.nopCommerce.portal.UserProductListPagesObject;
-import pageObjects.nopCommerce.portal.UserAddressInfoPageObject;
-import pageObjects.nopCommerce.portal.UserChangePasswordInfoPageObject;
-import pageObjects.nopCommerce.portal.UserCustomerInfoPageObject;
-import pageObjects.nopCommerce.portal.UserHomePageObject;
-import pageObjects.nopCommerce.portal.UserMyProductReviewsPageObject;
-import pageObjects.nopCommerce.portal.UserSearchingPageObject;
-import pageUIs.nopCommerce.user.BasePageUI;
+import pageObjects.wordpresspj.admin.AdminLoginPageObject;
+import pageUIs.wordpresspj.common.BasePageUI;
 
 public class BasePage {
 
@@ -256,6 +249,10 @@ public class BasePage {
 		}
 	}
 
+	public String getElementAttribute(WebDriver driver, String locatorType, String attributeName, String... dynamicValues) {
+		return getWebElement(driver, getDynamicXpath(locatorType, dynamicValues)).getAttribute(attributeName);
+	}
+	
 	public String getElementAttribute(WebDriver driver, String locatorType, String attributeName) {
 		return getWebElement(driver, locatorType).getAttribute(attributeName);
 	}
@@ -522,86 +519,16 @@ public class BasePage {
 	}
 	
 	/*
-	 * NOPCOMMERCE PJ
+	 * WORDPRESS PJ DEMO
 	 */
-	public UserAddressInfoPageObject openAddressPage(WebDriver driver) {
-		waitForElementClickable(driver, BasePageUI.ADDRESS_LINK);
-		clickToElement(driver, BasePageUI.ADDRESS_LINK);
-		return PageGeneratorManager.getUserAddressPage(driver);
-	}
 
-	public UserChangePasswordInfoPageObject openChangePasswordPage(WebDriver driver) {
-		waitForElementClickable(driver, BasePageUI.CHANGE_PASSWORD_LINK);
-		clickToElement(driver, BasePageUI.CHANGE_PASSWORD_LINK);
-		return PageGeneratorManager.getUserChangePasswordPage(driver);
-	}
-
-	public UserCustomerInfoPageObject openCustomerInfoPage(WebDriver driver) {
-		waitForElementClickable(driver, BasePageUI.CUSTOMER_INFO_LINK);
-		clickToElement(driver, BasePageUI.CUSTOMER_INFO_LINK);
-		return PageGeneratorManager.getUserCustomerInfoPage(driver);
-	}
-
-	public UserMyProductReviewsPageObject openMyProductReviewsPage(WebDriver driver) {
-		waitForElementClickable(driver, BasePageUI.PRODUCT_REVIEW_LINK);
-		clickToElement(driver, BasePageUI.PRODUCT_REVIEW_LINK);
-		return PageGeneratorManager.getUserMyProductReviewsPage(driver);
-	}
-
-	// 4pages in my account
-	public BasePage openPagesAtMyAccountPageByName(WebDriver driver, String pageName) {
-		waitForElementClickable(driver, BasePageUI.DYNAMIC_PAGES_AT_MY_ACCOUNT_AREA, pageName);
-		clickToElement(driver, BasePageUI.DYNAMIC_PAGES_AT_MY_ACCOUNT_AREA, pageName);
-		switch (pageName) {
-		case "Customer info":
-			return PageGeneratorManager.getUserCustomerInfoPage(driver);
-
-		case "Addresses":
-			return PageGeneratorManager.getUserAddressPage(driver);
-
-		case "Change password":
-			return PageGeneratorManager.getUserChangePasswordPage(driver);
-
-		case "My product reviews":
-			return PageGeneratorManager.getUserMyProductReviewsPage(driver);
-		default:
-			throw new RuntimeException("Invalid page name at My account area. ");
-		}
-	}
-
-	public UserHomePageObject openUserHomePage(WebDriver driver) {
-		waitForElementClickable(driver, BasePageUI.LOGOUT_LINK_USER);
-		clickToElement(driver, BasePageUI.LOGOUT_LINK_USER);
-		return PageGeneratorManager.getUserHomePage(driver);
-	}
-
-	public AdminLoginPageObject openAdminLoginPage(WebDriver driver) {
-		waitForElementClickable(driver, BasePageUI.LOGOUT_LINK_ADMIN);
-		clickToElement(driver, BasePageUI.LOGOUT_LINK_ADMIN);
+	public AdminLoginPageObject openAdminLoginPage(WebDriver driver, String nameSubMenu) {
+		waitForElementClickable(driver, BasePageUI.AVARTA_MENU_ADMIN);
+		hoverMouseToElement(driver, BasePageUI.AVARTA_MENU_ADMIN);
+		sleepInSecond(shortTimeout);
+		waitForAllElementVisible(driver, BasePageUI.DYNAMIC_SUB_AVARTA_MENU_ADMIN, nameSubMenu);
+		clickToElement(driver, BasePageUI.DYNAMIC_SUB_AVARTA_MENU_ADMIN, nameSubMenu);
 		return PageGeneratorManager.getAdminLoginPage(driver);
-	}
-
-	//searching
-	public void enterDataOnSearchingBar(WebDriver driver, String valueSearch) {
-		waitForElementVisible(driver, BasePageUI.SEARCH_FIELD);
-		sendkeyToElement(driver, BasePageUI.SEARCH_FIELD, valueSearch);
-	}
-	
-	public UserSearchingPageObject clickSearchButtonOnSearchingBar(WebDriver driver) {
-		waitForElementVisible(driver, BasePageUI.SEARCH_BUTTON_ON_SEARCHING_BAR);
-		clickToElement(driver, BasePageUI.SEARCH_BUTTON_ON_SEARCHING_BAR);
-		return PageGeneratorManager.getSearchingPage(driver);
-	}
-	
-	public void hoverMenuHeader(WebDriver driver, String nameMenu) {
-		waitForElementVisible(driver, BasePageUI.NAME_MENU_HEADER, nameMenu);
-		hoverMouseToElement(driver, BasePageUI.NAME_MENU_HEADER, nameMenu);
-	}
-	
-	public UserProductListPagesObject clickSubCategoryMenu(WebDriver driver, String subCategoryMenu) {
-		waitForElementVisible(driver, BasePageUI.NAME_SUB_MENU_HEADER, subCategoryMenu);
-		clickToElement(driver, BasePageUI.NAME_SUB_MENU_HEADER, subCategoryMenu);
-		return PageGeneratorManager.getProductListPages(driver);
 	}
 	
 }

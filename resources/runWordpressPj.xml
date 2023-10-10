@@ -20,12 +20,14 @@
   	
   </listeners>
   
-  <!-- <parameter name="evironment" value="dev"/>-->
+ <!--  <parameter name="urlAdmin" value="http://localhost/wp-admin/"/>
+  <parameter name="urlUser" value="http://localhost"/>-->
+  
   <test name="Run on Firefox">
   	<parameter name="browser" value="firefox"/>
     <classes>
-      <!-- <class name="com.wordpresspj.common.Common_01_Login_Cookie"/>-->
       <class name="com.wordpresspj.admin.Admin_01_Login"/>
+      <!-- <class name="com.wordpresspj.admin.Admin_03_Categories"/>-->
     </classes>
   </test>
   

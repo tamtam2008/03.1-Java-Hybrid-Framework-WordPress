@@ -19,7 +19,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pageObjects.wordpresspj.admin.AdminCategoriesPageObject;
 import pageObjects.wordpresspj.admin.AdminLoginPageObject;
+import pageObjects.wordpresspj.admin.AdminPostPageObject;
 import pageUIs.wordpresspj.common.BasePageUI;
 
 public class BasePage {
@@ -529,6 +531,19 @@ public class BasePage {
 		waitForAllElementVisible(driver, BasePageUI.DYNAMIC_SUB_AVARTA_MENU_ADMIN, nameSubMenu);
 		clickToElement(driver, BasePageUI.DYNAMIC_SUB_AVARTA_MENU_ADMIN, nameSubMenu);
 		return PageGeneratorManager.getAdminLoginPage(driver);
+	}
+	
+	public void openLeftMenuAdmin(WebDriver driver, String dynamicNameLeftMenu) {
+		waitForElementVisible(driver, BasePageUI.DYNAMIC_LEFT_MENU_ADMIN, dynamicNameLeftMenu);
+		clickToElement(driver, BasePageUI.DYNAMIC_LEFT_MENU_ADMIN, dynamicNameLeftMenu);
+	}
+	
+	public AdminCategoriesPageObject openSubLeftMenuAdmin(WebDriver driver, String parentLeftMenu, String childLeftMenu) {
+		waitForElementVisible(driver, BasePageUI.DYNAMIC_LEFT_MENU_ADMIN, parentLeftMenu);
+		hoverMouseToElement(driver, BasePageUI.DYNAMIC_LEFT_MENU_ADMIN, parentLeftMenu);
+		waitForAllElementVisible(driver, BasePageUI.DYNAMIC_SUB_LEFT_MENU_ADMIN, parentLeftMenu, childLeftMenu);
+		clickToElement(driver, BasePageUI.DYNAMIC_SUB_LEFT_MENU_ADMIN, parentLeftMenu, childLeftMenu);
+		return PageGeneratorManager.getAdminCategoriesPage(driver);
 	}
 	
 }
